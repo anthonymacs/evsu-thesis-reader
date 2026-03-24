@@ -34,10 +34,9 @@
             </main>
         </div>
 
-        <livewire:auth.logout />
-        <x-ui.confirmation-modal />
-
-        <x-ui.toast />
+        {{-- <livewire:auth.logout /> --}}
+        {{-- <x-ui.confirmation-modal /> --}}
+        {{-- <x-ui.toast /> --}}
     </div>
 
     @stack('scripts')
