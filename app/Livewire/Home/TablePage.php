@@ -29,6 +29,9 @@ class TablePage extends Component
     #[Url(keep: true)]
     public string $sort = 'latest';
 
+    #[Url(keep: true)]
+    public string $course = '';
+
     public function mount(): void
     {
         if (Auth::check()) {
@@ -88,6 +91,7 @@ class TablePage extends Component
             ->when($this->sort === 'latest', fn($query) => $query->latest())
             ->when($this->sort === 'alphabetical', fn($query) => $query->orderBy('title'))
             ->when($this->sort === 'popular', fn($query) => $query->orderByDesc('view_count'))
+            ->when($this->course, fn($query) => $query->where('course', $this->course))
             ->paginate(25);
     }
 
@@ -102,5 +106,9 @@ class TablePage extends Component
             'documents'  => $this->documents,
             'categories' => $this->categories,
         ]);
+    }
+    public function updatingCourse(): void
+    {
+        $this->resetPage();
     }
 }

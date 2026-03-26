@@ -33,9 +33,9 @@
                             {{ $document->status->label() }}
                         </x-ui.badge>
                         @if ($document->visibility === \App\Enums\DocumentVisibility::PUBLIC)
-                            <x-ui.badge variant="success">Public</x-ui.badge>
+                        <x-ui.badge variant="success">Public</x-ui.badge>
                         @else
-                            <x-ui.badge variant="warning">Restricted</x-ui.badge>
+                        <x-ui.badge variant="warning">Restricted</x-ui.badge>
                         @endif
                     </div>
                 </div>
@@ -60,30 +60,34 @@
             </x-slot:footer>
 
             <!-- Basic Information Section -->
-            <x-form.grid cols="2">
-                <!-- Document Title -->
-                <div>
-                    <x-form.label for="title" required>Document Title</x-form.label>
-                    <x-form.input type="text" id="title" wire:model="title"
-                        placeholder="e.g. Course Syllabus - Spring 2024">
-                        <x-slot:icon>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                        </x-slot:icon>
-                    </x-form.input>
-                </div>
-
+            <x-form.grid cols="3">
+                <!-- Title -->
                 <!-- Category -->
-                <div>
-                    <x-form.label for="category_id" required>Category</x-form.label>
-                    <x-form.select id="category_id" wire:model="category_id" placeholder="Select a category">
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </x-form.select>
-                </div>
+                <!-- Course (new) -->
+            </x-form.grid>
+            <!-- Document Title -->
+            <div>
+                <x-form.label for="title" required>Document Title</x-form.label>
+                <x-form.input type="text" id="title" wire:model="title"
+                    placeholder="e.g. Course Syllabus - Spring 2024">
+                    <x-slot:icon>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </x-slot:icon>
+                </x-form.input>
+            </div>
+
+            <!-- Category -->
+            <div>
+                <x-form.label for="category_id" required>Category</x-form.label>
+                <x-form.select id="category_id" wire:model="category_id" placeholder="Select a category">
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </x-form.select>
+            </div>
             </x-form.grid>
 
             <!-- Current File Section -->
@@ -117,37 +121,37 @@
                             class="flex flex-col items-center justify-center w-full h-40 px-4 transition bg-gray-50 border-2 border-gray-200 border-dashed rounded-xl cursor-pointer hover:bg-gray-100 hover:border-university-red/30">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                 @if ($file)
-                                    <svg class="w-10 h-10 mb-3 text-university-red" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <p class="mb-2 text-sm font-semibold text-gray-700">
-                                        New File: <span
-                                            class="text-university-red">{{ $file->getClientOriginalName() }}</span>
-                                    </p>
-                                    <p class="text-xs text-gray-500">
-                                        Size: {{ number_format($file->getSize() / 1024, 2) }} KB
-                                    </p>
+                                <svg class="w-10 h-10 mb-3 text-university-red" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <p class="mb-2 text-sm font-semibold text-gray-700">
+                                    New File: <span
+                                        class="text-university-red">{{ $file->getClientOriginalName() }}</span>
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    Size: {{ number_format($file->getSize() / 1024, 2) }} KB
+                                </p>
                                 @else
-                                    <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                    </svg>
-                                    <p class="mb-2 text-sm font-semibold text-gray-700">
-                                        Click to upload a replacement file
-                                    </p>
-                                    <p class="text-xs text-gray-500">
-                                        PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, TXT, JPG, PNG (MAX. 10MB)
-                                    </p>
+                                <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                <p class="mb-2 text-sm font-semibold text-gray-700">
+                                    Click to upload a replacement file
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, TXT, JPG, PNG (MAX. 10MB)
+                                </p>
                                 @endif
                             </div>
                             <input id="file" type="file" wire:model="file" class="hidden" />
                         </label>
                     </div>
                     @error('file')
-                        <p class="mt-1.5 text-sm text-red-600 font-medium">{{ $message }}</p>
+                    <p class="mt-1.5 text-sm text-red-600 font-medium">{{ $message }}</p>
                     @enderror
 
                     <div wire:loading wire:target="file" class="mt-2">
@@ -164,16 +168,16 @@
                     </div>
 
                     @if ($file)
-                        <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                            <p class="text-xs text-blue-700 font-medium">
-                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                The current file will be replaced when you save this form.
-                            </p>
-                        </div>
+                    <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p class="text-xs text-blue-700 font-medium">
+                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            The current file will be replaced when you save this form.
+                        </p>
+                    </div>
                     @endif
                 </div>
             </x-form.section>
@@ -196,120 +200,120 @@
                 <div class="space-y-4">
                     <!-- Existing Tags Display -->
                     @if ($document->tags->count() > 0)
-                        <div class="mb-4">
-                            <p class="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Current Tags
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                @foreach ($document->tags as $existingTag)
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-university-red/10 text-university-red rounded-lg text-sm font-medium border border-university-red/20">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                        </svg>
-                                        {{ $existingTag->name }}
-                                    </span>
-                                @endforeach
-                            </div>
-                            <p class="mt-2 text-xs text-gray-500">
-                                <svg class="w-4 h-4 inline-block mr-1 text-gray-400" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="mb-4">
+                        <p class="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Current Tags
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach ($document->tags as $existingTag)
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-university-red/10 text-university-red rounded-lg text-sm font-medium border border-university-red/20">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                 </svg>
-                                Use the fields below to add, remove, or modify tags for this document.
-                            </p>
+                                {{ $existingTag->name }}
+                            </span>
+                            @endforeach
                         </div>
+                        <p class="mt-2 text-xs text-gray-500">
+                            <svg class="w-4 h-4 inline-block mr-1 text-gray-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Use the fields below to add, remove, or modify tags for this document.
+                        </p>
+                    </div>
                     @endif
 
                     <!-- Tag Inputs -->
                     @foreach ($tags as $index => $tag)
-                        <!-- Wrapper div for the whole row including errors -->
-                        <div wire:key="tag-{{ $index }}">
+                    <!-- Wrapper div for the whole row including errors -->
+                    <div wire:key="tag-{{ $index }}">
 
-                            <!-- Input and Button Row: Aligned Center -->
-                            <div class="flex gap-3 items-center">
+                        <!-- Input and Button Row: Aligned Center -->
+                        <div class="flex gap-3 items-center">
 
-                                <!-- Input Container -->
-                                <div class="flex-1 relative">
-                                    <x-form.input type="text"
-                                        wire:model.live.debounce.300ms="tags.{{ $index }}.name"
-                                        placeholder="Enter or search for a tag">
-                                        <x-slot:icon>
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                            </svg>
-                                        </x-slot:icon>
-                                    </x-form.input>
-                                </div>
-
-                                <!-- Button Container: Removed pt-2, added shrink-0 -->
-                                <div class="flex gap-2 shrink-0">
-                                    @if ($index === count($tags) - 1)
-                                        <button type="button" wire:click="addTag"
-                                            class="inline-flex items-center justify-center w-9 h-9 text-sm font-medium text-white bg-university-red rounded-lg hover:bg-university-red/90 focus:outline-none focus:ring-2 focus:ring-university-red focus:ring-offset-2 transition-colors"
-                                            title="Add another tag">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M12 4v16m8-8H4" />
-                                            </svg>
-                                        </button>
-                                    @endif
-
-                                    @if (count($tags) > 1)
-                                        <button type="button" wire:click="removeTag({{ $index }})"
-                                            class="inline-flex items-center justify-center w-9 h-9 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-colors"
-                                            title="Remove tag">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    @endif
-                                </div>
+                            <!-- Input Container -->
+                            <div class="flex-1 relative">
+                                <x-form.input type="text"
+                                    wire:model.live.debounce.300ms="tags.{{ $index }}.name"
+                                    placeholder="Enter or search for a tag">
+                                    <x-slot:icon>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                        </svg>
+                                    </x-slot:icon>
+                                </x-form.input>
                             </div>
 
-                            <!-- Error Message: -->
-                            @error("tags.{$index}.name")
-                                <p class="mt-1.5 text-sm text-red-600 font-medium">{{ $message }}</p>
-                            @enderror
+                            <!-- Button Container: Removed pt-2, added shrink-0 -->
+                            <div class="flex gap-2 shrink-0">
+                                @if ($index === count($tags) - 1)
+                                <button type="button" wire:click="addTag"
+                                    class="inline-flex items-center justify-center w-9 h-9 text-sm font-medium text-white bg-university-red rounded-lg hover:bg-university-red/90 focus:outline-none focus:ring-2 focus:ring-university-red focus:ring-offset-2 transition-colors"
+                                    title="Add another tag">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </button>
+                                @endif
+
+                                @if (count($tags) > 1)
+                                <button type="button" wire:click="removeTag({{ $index }})"
+                                    class="inline-flex items-center justify-center w-9 h-9 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-colors"
+                                    title="Remove tag">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                                @endif
+                            </div>
                         </div>
+
+                        <!-- Error Message: -->
+                        @error("tags.{$index}.name")
+                        <p class="mt-1.5 text-sm text-red-600 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
                     @endforeach
 
                     <!-- Tag Suggestions Dropdown -->
                     @if ($showSuggestions && !empty($suggestedTags))
-                        <div class="relative">
-                            <div
-                                class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                <div class="p-2">
-                                    <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                        Existing Tags</p>
-                                    @foreach ($suggestedTags as $suggestion)
-                                        <button type="button"
-                                            wire:click="selectTag('{{ $suggestion['name'] }}', {{ count($tags) - 1 }})"
-                                            class="w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors flex items-center justify-between group">
-                                            <div class="flex items-center gap-2">
-                                                <svg class="w-4 h-4 text-gray-400" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                                </svg>
-                                                <span
-                                                    class="text-sm font-medium text-gray-900">{{ $suggestion['name'] }}</span>
-                                            </div>
-                                            <span class="text-xs text-gray-500">{{ $suggestion['document_count'] }}
-                                                docs</span>
-                                        </button>
-                                    @endforeach
-                                </div>
+                    <div class="relative">
+                        <div
+                            class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                            <div class="p-2">
+                                <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                    Existing Tags</p>
+                                @foreach ($suggestedTags as $suggestion)
+                                <button type="button"
+                                    wire:click="selectTag('{{ $suggestion['name'] }}', {{ count($tags) - 1 }})"
+                                    class="w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors flex items-center justify-between group">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium text-gray-900">{{ $suggestion['name'] }}</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">{{ $suggestion['document_count'] }}
+                                        docs</span>
+                                </button>
+                                @endforeach
                             </div>
                         </div>
+                    </div>
                     @endif
 
                     <p class="text-xs text-gray-500">
@@ -332,9 +336,9 @@
                         <x-form.label for="visibility" required>Visibility</x-form.label>
                         <x-form.select id="visibility" wire:model="visibility">
                             @foreach ($visibilityOptions as $option)
-                                <option value="{{ $option->value }}">
-                                    {{ $option->label() }} - {{ $option->description() }}
-                                </option>
+                            <option value="{{ $option->value }}">
+                                {{ $option->label() }} - {{ $option->description() }}
+                            </option>
                             @endforeach
                         </x-form.select>
                     </div>
@@ -344,7 +348,7 @@
                         <x-form.label for="status" required>Status</x-form.label>
                         <x-form.select id="status" wire:model="status">
                             @foreach ($statusOptions as $option)
-                                <option value="{{ $option->value }}">{{ $option->label() }}</option>
+                            <option value="{{ $option->value }}">{{ $option->label() }}</option>
                             @endforeach
                         </x-form.select>
                     </div>
@@ -387,7 +391,8 @@
                             <div>
                                 <p class="text-xs text-green-600 font-medium uppercase">Uploaded Date</p>
                                 <p class="text-sm font-bold text-green-900">
-                                    {{ $document->created_at->format('M d, Y') }}</p>
+                                    {{ $document->created_at->format('M d, Y') }}
+                                </p>
                             </div>
                         </div>
                     </div>

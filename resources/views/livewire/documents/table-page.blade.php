@@ -34,6 +34,15 @@
                         @endforeach
                     </select>
 
+                    <!-- Course Filter -->
+                    <select wire:model.live="courseFilter"
+                        class="w-full md:w-36 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-600 focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
+                        <option value="">All Courses</option>
+                        @foreach ($courseOptions as $course)
+                            <option value="{{ $course->value }}">{{ $course->value }}</option>
+                        @endforeach
+                    </select>
+
                     <!-- Visibility Filter -->
                     <select wire:model.live="visibilityFilter"
                         class="w-full md:w-32 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-600 focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
@@ -62,6 +71,7 @@
                     <x-table.cell header>ID</x-table.cell>
                     <x-table.cell header>Document</x-table.cell>
                     <x-table.cell header>Category</x-table.cell>
+                    <x-table.cell header>Course</x-table.cell>
                     <x-table.cell header class="text-center">Visibility</x-table.cell>
                     <x-table.cell header class="text-center">Status</x-table.cell>
                     <x-table.cell header class="text-center">Date Uploaded</x-table.cell>
@@ -104,6 +114,16 @@
                                     </svg>
                                     {{ $document->category->name ?? "Not Set" }}
                                 </span>
+                            </x-table.cell>
+
+                            <x-table.cell>
+                                @if ($document->course)
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-violet-100 text-violet-700">
+                                        {{ $document->course->value }}
+                                    </span>
+                                @else
+                                    <span class="text-xs text-gray-400">—</span>
+                                @endif
                             </x-table.cell>
 
                             <x-table.cell>

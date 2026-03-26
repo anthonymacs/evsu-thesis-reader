@@ -46,6 +46,8 @@ class UpdatePage extends Component
 
     public bool $showSuggestions = false;
 
+    public string $course = '';
+
     public function mount(Document $document): void
     {
         $this->authorize('update', $document);
@@ -56,6 +58,7 @@ class UpdatePage extends Component
         $this->category_id = $document->category_id;
         $this->visibility = $document->visibility->value;
         $this->status = $document->status->value;
+        $this->course = $document->course?->value ?? '';
 
         $this->loadExistingTags();
     }
@@ -70,6 +73,8 @@ class UpdatePage extends Component
             'status' => ['required', Rule::enum(DocumentStatus::class)],
             'file' => ['nullable', 'file', 'mimes:pdf', 'max:102400'],
             'tags.*.name' => ['nullable', 'string', 'max:50'],
+            'course' => ['nullable', Rule::enum(\App\Enums\Course::class)],
+
         ];
     }
 
@@ -189,6 +194,7 @@ class UpdatePage extends Component
             'category_id' => $validated['category_id'],
             'visibility' => $validated['visibility'],
             'status' => $validated['status'],
+            'course'      => $validated['course'] ?? null,
         ]);
     }
 
@@ -268,6 +274,7 @@ class UpdatePage extends Component
             'categories' => $categories,
             'visibilityOptions' => DocumentVisibility::cases(),
             'statusOptions' => DocumentStatus::cases(),
+            'courseOptions'    => \App\Enums\Course::cases(),
         ]);
     }
 }

@@ -32,11 +32,15 @@ class TablePage extends Component
 
     public int $perPage = 10;
 
+    #[Url]
+    public string $courseFilter = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
         'statusFilter' => ['except' => ''],
         'visibilityFilter' => ['except' => ''],
         'categoryFilter' => ['except' => ''],
+        'courseFilter'    => ['except' => ''],
     ];
 
     public function mount(): void
@@ -108,8 +112,8 @@ class TablePage extends Component
             })
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
-                    $q->where('title', 'like', '%'.$this->search.'%')
-                        ->orWhere('description', 'like', '%'.$this->search.'%');
+                    $q->where('title', 'like', '%' . $this->search . '%')
+                        ->orWhere('description', 'like', '%' . $this->search . '%');
                 });
             })
             ->when($this->statusFilter, function ($query) {
@@ -121,16 +125,27 @@ class TablePage extends Component
             ->when($this->categoryFilter, function ($query) {
                 $query->where('category_id', $this->categoryFilter);
             })
+             ->when($this->courseFilter, function ($query) { 
+            $query->where('course', $this->courseFilter);
+             })
             ->latest()
             ->paginate($this->perPage);
+            
 
         $categories = Category::orderBy('name')->get();
+        
 
         return view('livewire.documents.table-page', [
             'documents' => $documents,
             'categories' => $categories,
             'statusOptions' => DocumentStatus::cases(),
             'visibilityOptions' => DocumentVisibility::cases(),
+            'courseOptions'     => \App\Enums\Course::cases(),
         ]);
+        
+    }
+    public function updatingCourseFilter(): void
+    {
+        $this->resetPage();
     }
 }

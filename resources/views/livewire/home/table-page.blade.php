@@ -141,7 +141,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <!-- Filter Section -->
             <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-4 md:p-6 mb-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
 
                     <!-- Search Input with Debounce -->
                     <div class="md:col-span-2 lg:col-span-2">
@@ -175,6 +175,20 @@
                             <option value="">All Categories</option>
                             @foreach ($categories as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                      <!-- Course Filter -->
+                    <div class="col-span-1">
+                        <label for="course"
+                            class="block text-[11px] font-bold text-slate-500 uppercase tracking-[0.1em] mb-2">
+                            Course
+                        </label>
+                        <select wire:model.live="course" id="course"
+                            class="block w-full rounded-lg border-slate-300 shadow-sm py-2.5 pl-3 pr-10 text-base focus:border-university-red focus:ring-4 focus:ring-university-red/10 transition-all sm:text-sm">
+                            <option value="">All Courses</option>
+                            @foreach (App\Enums\Course::cases() as $courseOption)
+                                <option value="{{ $courseOption->value }}">{{ $courseOption->value }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -44,6 +44,8 @@ class CreatePage extends Component
 
     public bool $showSuggestions = false;
 
+    public string $course = '';
+
     public function mount(): void
     {
         $this->authorize('create', Document::class);
@@ -71,6 +73,7 @@ class CreatePage extends Component
             'status' => ['required', Rule::enum(DocumentStatus::class)],
             'file' => ['required', 'file', 'mimes:pdf', 'max:102400'],
             'tags.*.name' => ['nullable', 'string', 'max:50'],
+            'course' => ['nullable', Rule::enum(\App\Enums\Course::class)],
         ];
     }
 
@@ -171,6 +174,7 @@ class CreatePage extends Component
             'categories' => $categories,
             'visibilityOptions' => DocumentVisibility::cases(),
             'statusOptions' => DocumentStatus::cases(),
+             'courseOptions'    => \App\Enums\Course::cases(), 
         ]);
     }
 
@@ -198,6 +202,7 @@ class CreatePage extends Component
             'visibility' => $validated['visibility'],
             'status' => $validated['status'],
             'view_count' => 0,
+            'course'      => $validated['course'] ?? null, // ✅
         ]);
     }
 

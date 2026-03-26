@@ -81,6 +81,18 @@
                         </span>
                     </div>
 
+                    <!-- Course (ADDED) -->
+                    <div>
+                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Course</p>
+                        @if ($document->course)
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-violet-100 text-violet-700">
+                                {{ $document->course->value }}
+                            </span>
+                        @else
+                            <p class="text-gray-400 text-sm italic">No course assigned.</p>
+                        @endif
+                    </div>
+
                     <div>
                         <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Slug</p>
                         <code class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-lg font-mono break-all">

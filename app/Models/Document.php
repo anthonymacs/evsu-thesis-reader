@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use App\Enums\Course;
 class Document extends Model
 {
     use Auditable, HasFactory;
@@ -30,13 +30,17 @@ class Document extends Model
         'visibility',
         'status',
         'view_count',
+        'course', 
     ];
 
     protected $casts = [
         'visibility' => DocumentVisibility::class,
         'status' => DocumentStatus::class,
         'view_count' => 'integer',
+        'course' => Course::class,
     ];
+
+    
 
     public function uploader(): BelongsTo
     {
@@ -122,4 +126,6 @@ class Document extends Model
     {
         return $this->hasMany(DocumentComment::class)->whereNull('parent_id')->with(['user', 'replies'])->latest();
     }
+
+
 }
