@@ -15,7 +15,7 @@
     @livewireStyles
 </head>
 
-<body class="bg-gray-50 font-sans antialiased">
+<body class="bg-slate-50 font-sans antialiased">
     <div x-data="adminLayout()" @resize.window="onResize()" class="flex h-screen overflow-hidden">
 
         <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false"
@@ -27,16 +27,17 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             <x-partials.header />
 
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     {{ $slot }}
                 </div>
             </main>
         </div>
 
-        {{-- <livewire:auth.logout /> --}}
-        {{-- <x-ui.confirmation-modal /> --}}
-        {{-- <x-ui.toast /> --}}
+        <livewire:auth.logout />
+        <x-ui.confirmation-modal />
+
+        <x-ui.toast />
     </div>
 
     @stack('scripts')

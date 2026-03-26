@@ -1,206 +1,267 @@
-<x-layouts.app title="Dashboard">
-
-    {{-- Stats Cards --}}
-    <div class="mb-8">
-        <h2 class="text-lg font-semibold text-gray-700 mb-4">Overview</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-center space-x-4">
-                <div class="flex-shrink-0 bg-red-100 text-university-red rounded-lg p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586l5.414 5.414V19a2 2 0 01-2 2z" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">Total Documents</p>
-                    <p class="text-2xl font-semibold text-gray-800">1,248</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-center space-x-4">
-                <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-lg p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m4-4a4 4 0 100-8 4 4 0 000 8z" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">Registered Users</p>
-                    <p class="text-2xl font-semibold text-gray-800">382</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-center space-x-4">
-                <div class="flex-shrink-0 bg-yellow-100 text-yellow-600 rounded-lg p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">Pending Approvals</p>
-                    <p class="text-2xl font-semibold text-gray-800">7</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-center space-x-4">
-                <div class="flex-shrink-0 bg-green-100 text-green-600 rounded-lg p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M7 7h.01M7 3h5l7 7-7 7H7L3 12V7a4 4 0 014-4z" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">Categories</p>
-                    <p class="text-2xl font-semibold text-gray-800">14</p>
-                </div>
-            </div>
-
+<div class="space-y-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
+            <p class="text-sm text-gray-500">Overview of your document management system</p>
+        </div>
+        <div class="text-sm text-gray-500">
+            Last updated: <span class="font-semibold text-gray-900">{{ now()->format('M d, Y g:i A') }}</span>
         </div>
     </div>
 
-    {{-- Recent Documents & Pending Approvals --}}
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-
-        {{-- Recent Documents --}}
-        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Total Documents -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-base font-semibold text-gray-700">Recent Documents</h3>
-                <a href="#" class="text-sm text-university-red hover:underline">View all</a>
+                <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                @if ($documentsGrowth > 0)
+                    <span class="text-xs text-green-600 font-medium">+{{ $documentsGrowth }}%</span>
+                @elseif($documentsGrowth < 0)
+                    <span class="text-xs text-red-600 font-medium">{{ $documentsGrowth }}%</span>
+                @else
+                    <span class="text-xs text-gray-600 font-medium">0%</span>
+                @endif
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left">
-                    <thead>
-                        <tr class="text-xs text-gray-400 uppercase border-b border-gray-100">
-                            <th class="pb-3 pr-4 font-medium">Title</th>
-                            <th class="pb-3 pr-4 font-medium">Category</th>
-                            <th class="pb-3 pr-4 font-medium">Uploaded by</th>
-                            <th class="pb-3 font-medium">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-50">
-                        <tr>
-                            <td class="py-3 pr-4 text-gray-800 font-medium">Curriculum Framework 2025</td>
-                            <td class="py-3 pr-4 text-gray-500">Academic</td>
-                            <td class="py-3 pr-4 text-gray-500">M. Santos</td>
-                            <td class="py-3">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Approved</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 pr-4 text-gray-800 font-medium">Enrollment Policy AY2025</td>
-                            <td class="py-3 pr-4 text-gray-500">Administrative</td>
-                            <td class="py-3 pr-4 text-gray-500">R. Valdez</td>
-                            <td class="py-3">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 pr-4 text-gray-800 font-medium">Research Grant Guidelines</td>
-                            <td class="py-3 pr-4 text-gray-500">Research</td>
-                            <td class="py-3 pr-4 text-gray-500">L. Reyes</td>
-                            <td class="py-3">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Approved</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 pr-4 text-gray-800 font-medium">Faculty Handbook Rev.3</td>
-                            <td class="py-3 pr-4 text-gray-500">HR</td>
-                            <td class="py-3 pr-4 text-gray-500">A. Cruz</td>
-                            <td class="py-3">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Rejected</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 pr-4 text-gray-800 font-medium">Student Affairs Manual</td>
-                            <td class="py-3 pr-4 text-gray-500">Student</td>
-                            <td class="py-3 pr-4 text-gray-500">P. Gomez</td>
-                            <td class="py-3">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <h3 class="text-2xl font-bold text-gray-900">{{ number_format($totalDocuments) }}</h3>
+            <p class="text-sm text-gray-500 mt-1">Total Documents</p>
         </div>
 
-        {{-- Pending Account Approvals --}}
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <!-- Total Views -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-base font-semibold text-gray-700">Pending Approvals</h3>
-                <a href="#" class="text-sm text-university-red hover:underline">View all</a>
+                <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </div>
             </div>
-            <ul class="divide-y divide-gray-50">
-                <li class="py-3 flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-full bg-university-red text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">JD</div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-800 truncate">Jose Dela Cruz</p>
-                        <p class="text-xs text-gray-400">Faculty · 2h ago</p>
-                    </div>
-                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
-                </li>
-                <li class="py-3 flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-full bg-university-red text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">MR</div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-800 truncate">Maria Ramos</p>
-                        <p class="text-xs text-gray-400">Staff · 5h ago</p>
-                    </div>
-                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
-                </li>
-                <li class="py-3 flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-full bg-university-red text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">BT</div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-800 truncate">Ben Torres</p>
-                        <p class="text-xs text-gray-400">Faculty · Yesterday</p>
-                    </div>
-                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
-                </li>
-            </ul>
+            <h3 class="text-2xl font-bold text-gray-900">{{ number_format($totalViews) }}</h3>
+            <p class="text-sm text-gray-500 mt-1">Total Views</p>
         </div>
 
+        <!-- Active Categories -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                </div>
+                <span class="text-xs text-gray-600 font-medium">All active</span>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900">{{ $activeCategories }}</h3>
+            <p class="text-sm text-gray-500 mt-1">Active Categories</p>
+        </div>
+
+        <!-- New This Month -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                </div>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900">{{ number_format($newThisMonth) }}</h3>
+            <p class="text-sm text-gray-500 mt-1">New This Month</p>
+        </div>
     </div>
 
-    {{-- Recent Activity --}}
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="text-base font-semibold text-gray-700 mb-4">Recent Activity</h3>
-        <ul class="space-y-4">
-            <li class="flex items-start space-x-3">
-                <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-green-500 flex-shrink-0"></span>
-                <div>
-                    <p class="text-sm text-gray-700"><span class="font-medium">M. Santos</span> uploaded <span class="font-medium">Curriculum Framework 2025.pdf</span></p>
-                    <p class="text-xs text-gray-400 mt-0.5">2 hours ago</p>
+    <!-- Two Column Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Document Status -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Document Status</h3>
+
+            @if ($totalDocuments > 0)
+                <div class="space-y-4">
+                    <!-- Active -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="text-sm font-medium text-gray-700">Active</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">{{ number_format($activeCount) }}
+                                ({{ $activePercentage }}%)</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: {{ $activePercentage }}%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Archived -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <span class="text-sm font-medium text-gray-700">Archived</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">{{ number_format($archivedCount) }}
+                                ({{ $archivedPercentage }}%)</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-red-500 h-2 rounded-full" style="width: {{ $archivedPercentage }}%"></div>
+                        </div>
+                    </div>
                 </div>
-            </li>
-            <li class="flex items-start space-x-3">
-                <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-blue-500 flex-shrink-0"></span>
-                <div>
-                    <p class="text-sm text-gray-700"><span class="font-medium">Admin</span> approved account for <span class="font-medium">L. Reyes</span></p>
-                    <p class="text-xs text-gray-400 mt-0.5">4 hours ago</p>
+            @else
+                <div class="text-center py-8">
+                    <p class="text-gray-500 text-sm">No documents available</p>
                 </div>
-            </li>
-            <li class="flex items-start space-x-3">
-                <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0"></span>
-                <div>
-                    <p class="text-sm text-gray-700"><span class="font-medium">Admin</span> rejected document <span class="font-medium">Faculty Handbook Rev.3</span></p>
-                    <p class="text-xs text-gray-400 mt-0.5">Yesterday at 3:42 PM</p>
+            @endif
+        </div>
+
+        <!-- Top Categories -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Top Categories</h3>
+
+          @if (!empty($topCategories))
+                <div class="space-y-4">
+                    @foreach ($topCategories as $index => $category)
+                        @php
+                            $colors = ['blue', 'green', 'purple', 'yellow', 'red'];
+                            $color = $colors[$index] ?? 'gray';
+                            $barWidth =
+                                $maxCategoryCount > 0
+                                    ? round(($category->documents_count / $maxCategoryCount) * 100, 1)
+                                    : 0;
+                        @endphp
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 bg-{{ $color }}-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span
+                                    class="text-sm font-bold text-{{ $color }}-600">{{ $index + 1 }}</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-900">{{ $category->name }}</span>
+                                    <span
+                                        class="text-sm font-bold text-gray-900">{{ number_format($category->documents_count) }}</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5">
+                                    <div class="bg-{{ $color }}-600 h-1.5 rounded-full"
+                                        style="width: {{ $barWidth }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </li>
-            <li class="flex items-start space-x-3">
-                <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-yellow-500 flex-shrink-0"></span>
-                <div>
-                    <p class="text-sm text-gray-700"><span class="font-medium">P. Gomez</span> added <span class="font-medium">Student Affairs Manual</span> to Read Later</p>
-                    <p class="text-xs text-gray-400 mt-0.5">Yesterday at 1:15 PM</p>
+            @else
+                <div class="text-center py-8">
+                    <p class="text-gray-500 text-sm">No categories available</p>
                 </div>
-            </li>
-            <li class="flex items-start space-x-3">
-                <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-green-500 flex-shrink-0"></span>
-                <div>
-                    <p class="text-sm text-gray-700"><span class="font-medium">R. Valdez</span> uploaded <span class="font-medium">Enrollment Policy AY2025.docx</span></p>
-                    <p class="text-xs text-gray-400 mt-0.5">2 days ago</p>
-                </div>
-            </li>
-        </ul>
+            @endif
+        </div>
     </div>
 
-</x-layouts.app>
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-900">Recent Activity</h3>
+            <a wire:navigate href="{{ route('audit-logs.index') }}"
+                class="text-sm font-medium text-red-600 hover:text-red-700">
+                View all
+            </a>
+        </div>
+
+        <div class="space-y-3">
+            @forelse($recentActivity as $log)
+                @php
+                    $iconConfig = match ($log->event) {
+                        'created' => [
+                            'bg' => 'bg-green-100',
+                            'svg' => 'text-green-600',
+                            'path' => 'M12 4v16m8-8H4',
+                            'label' => 'New ' . $log->auditable_type_name,
+                        ],
+                        'updated' => [
+                            'bg' => 'bg-blue-100',
+                            'svg' => 'text-blue-600',
+                            'path' =>
+                                'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z',
+                            'label' => 'Updated ' . $log->auditable_type_name,
+                        ],
+                        'deleted' => [
+                            'bg' => 'bg-red-100',
+                            'svg' => 'text-red-600',
+                            'path' =>
+                                'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16',
+                            'label' => 'Deleted ' . $log->auditable_type_name,
+                        ],
+                        default => [
+                            'bg' => 'bg-purple-100',
+                            'svg' => 'text-purple-600',
+                            'path' => 'M5 13l4 4L19 7',
+                            'label' => ucfirst($log->event) . ' ' . $log->auditable_type_name,
+                        ],
+                    };
+                @endphp
+
+                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <div
+                        class="w-8 h-8 {{ $iconConfig['bg'] }} rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 {{ $iconConfig['svg'] }}" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="{{ $iconConfig['path'] }}" />
+                        </svg>
+                    </div>
+
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-gray-900">{{ $iconConfig['label'] }}</p>
+                        <p class="text-xs text-gray-500 mt-0.5">
+                            {{ $log->created_at->diffForHumans() }}
+                            @if ($log->user)
+                                &middot; by {{ $log->user->full_name }}
+                            @endif
+                        </p>
+                    </div>
+
+                    <a wire:navigate href="{{ route('audit-logs.show', $log) }}"
+                        class="flex-shrink-0 text-xs font-medium text-red-600 hover:text-red-700 hover:underline transition-colors">
+                        View
+                    </a>
+                </div>
+            @empty
+                <div class="text-center py-8">
+                    <p class="text-gray-500 text-sm">No recent activity found</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-lg p-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-white text-center md:text-left">
+                <h3 class="text-xl font-bold mb-1">Ready to add new documents?</h3>
+                <p class="text-red-100 text-sm">Upload and manage your documents efficiently</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <a wire:navigate href="{{ route('uploads.index') }}"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-red-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Upload Document
+                </a>
+                <a wire:navigate href="{{ route('documents.index') }}"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors border border-white/30 text-sm">
+                    Browse All
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

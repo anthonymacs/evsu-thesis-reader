@@ -97,28 +97,6 @@
         border-color: #dc2626;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-        color: #1f2937 !important;
-        -webkit-text-fill-color: #1f2937 !important;
-    }
-
-    input[type="text"]::placeholder,
-    input[type="email"]::placeholder,
-    input[type="password"]::placeholder {
-        color: #9ca3af !important;
-        -webkit-text-fill-color: #9ca3af !important;
-    }
-
-    /* Fix browser autofill hiding text */
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus {
-        -webkit-text-fill-color: #1f2937 !important;
-        box-shadow: 0 0 0px 1000px #fff inset !important;
-    }
-
     .error-message {
         color: #dc2626;
         font-size: 0.85rem;
@@ -346,98 +324,99 @@
         }
     }
 
-    .auth-header {
-        margin-bottom: 2rem;
-    }
+   .auth-header {
+    margin-bottom: 2rem;
+}
 
+.auth-header-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.auth-header-logo {
+    flex-shrink: 0;
+}
+
+.auth-header {
+    margin-bottom: 2rem;
+}
+
+.auth-header-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.auth-header-logo {
+    flex-shrink: 0;
+}
+
+.header-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #f3f4f6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-header-text {
+    flex: 1;
+    text-align: left;
+}
+
+.auth-header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #f1f1f2;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+}
+
+.auth-header p {
+    font-size: 1rem;
+    color: #e3e7ef;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
     .auth-header-content {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .auth-header-logo {
-        flex-shrink: 0;
-    }
-
-    .auth-header {
-        margin-bottom: 2rem;
-    }
-
-    .auth-header-content {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .auth-header-logo {
-        flex-shrink: 0;
-    }
-
-    .header-logo {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid #f3f4f6;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        text-align: center;
     }
 
     .auth-header-text {
-        flex: 1;
-        text-align: left;
+        text-align: center;
     }
 
     .auth-header h1 {
-        font-size: 1.875rem;
-        font-weight: 700;
-        color: #f1f1f2;
-        margin: 0 0 0.5rem 0;
-        line-height: 1.2;
+        font-size: 1.5rem;
     }
 
     .auth-header p {
-        font-size: 1rem;
-        color: #e3e7ef;
-        margin: 0;
+        font-size: 0.875rem;
     }
 
-    /* Responsive Design */
-    @media (max-width: 640px) {
-        .auth-header-content {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .auth-header-text {
-            text-align: center;
-        }
-
-        .auth-header h1 {
-            font-size: 1.5rem;
-        }
-
-        .auth-header p {
-            font-size: 0.875rem;
-        }
-
-        .header-logo {
-            width: 60px;
-            height: 60px;
-        }
+    .header-logo {
+        width: 60px;
+        height: 60px;
     }
+}
 
-    .sidebar-logo {
-        object-fit: cover;
-        border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        flex-shrink: 0;
-        transition: all 0.3s ease;
-    }
+.sidebar-logo {
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
 
-    .sidebar-logo:hover {
-        border-color: rgba(255, 255, 255, 0.6);
-        transform: scale(1.05);
-    }
+.sidebar-logo:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
 </style>
