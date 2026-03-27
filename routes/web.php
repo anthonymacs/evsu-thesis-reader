@@ -74,4 +74,8 @@ Route::middleware(['auth', EnsureUserIsNotSuspended::class, EnsureUserIsApproved
         Route::prefix('approvals')->group(function () {
             Route::get('', \App\Livewire\Approvals\TablePage::class)->name('approvals.index');
         });
+
+        Route::prefix('notifications')->group(function () {
+            Route::get('', \App\Livewire\Notification\IndexPage::class)->name('notifications.index');
+        });
     });

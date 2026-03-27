@@ -14,6 +14,8 @@
         </div>
 
         <div class="flex items-center space-x-4">
+
+
             <div class="relative">
                 <button @click="userMenuOpen = !userMenuOpen"
                     class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none transition-colors">
