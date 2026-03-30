@@ -17,6 +17,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
+use App\Services\NotificationService;
 
 #[Layout('components.layouts.app')]
 class CreatePage extends Component
@@ -155,8 +156,12 @@ class CreatePage extends Component
 
             DB::commit();
 
+            // ✅ Notify all users after successful commit
+            app(NotificationService::class)->notifyAllOnUpload($document);
+
             RedirectNotification::success('Document uploaded successfully!');
             $this->redirect(route('documents.index'), navigate: true);
+
         } catch (\RuntimeException $e) {
             DB::rollBack();
             $this->dispatchErrorNotification($e->getMessage());
@@ -202,7 +207,7 @@ class CreatePage extends Component
             'visibility' => $validated['visibility'],
             'status' => $validated['status'],
             'view_count' => 0,
-            'course'      => $validated['course'] ?? null, // ✅
+            'course'      => $validated['course'] ?? null, 
         ]);
     }
 
