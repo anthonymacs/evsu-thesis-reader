@@ -25,15 +25,15 @@
         </div>
 
         {{-- Notification List --}}
-        <div class="bg-white border border-slate-200 rounded-xl shadow-sm divide-y divide-slate-100 overflow-hidden">
+        <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
 
             @forelse ($notifications as $notification)
                 @php $isUnread = is_null($notification->read_at); @endphp
 
-                <div
-                    wire:click="markAsRead({{ $notification->id }})"
+                
+                  <a  href="{{ route('notifications.show', $notification->id) }}"
                     wire:key="notification-{{ $notification->id }}"
-                    class="flex items-start gap-4 px-6 py-5 cursor-pointer transition-colors
+                    class="flex items-start gap-4 px-6 py-5 w-full border-b border-slate-100 last:border-b-0 transition-colors no-underline
                         {{ $isUnread ? 'bg-university-red/5 hover:bg-university-red/10' : 'hover:bg-slate-50' }}">
 
                     {{-- Icon --}}
@@ -50,11 +50,9 @@
                     <div class="flex-1 min-w-0">
                         <p class="text-sm {{ $isUnread ? 'text-slate-800 font-medium' : 'text-slate-500' }}">
                             A new document
-                            <a href="{{ route('documents.show', $notification->document->slug) }}"
-                                onclick="event.stopPropagation()"
-                                class="{{ $isUnread ? 'text-university-red' : 'font-medium text-slate-700' }} hover:underline">
+                            <span class="{{ $isUnread ? 'text-university-red' : 'font-medium text-slate-700' }} hover:underline">
                                 "{{ $notification->document->title }}"
-                            </a>
+                            </span>
                             was uploaded.
                         </p>
                         <p class="text-xs text-slate-400 mt-1">
@@ -68,7 +66,7 @@
                             <div class="w-2.5 h-2.5 bg-university-red rounded-full"></div>
                         </div>
                     @endif
-                </div>
+                </a>
 
             @empty
                 <div class="px-6 py-12 text-center">
