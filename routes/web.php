@@ -80,6 +80,6 @@ Route::middleware(['auth', EnsureUserIsNotSuspended::class, EnsureUserIsApproved
         });
         Route::prefix('notifications')->group(function () {
             Route::get('', \App\Livewire\Notification\IndexPage::class)->name('notifications.index');
-            Route::get('{notification}', \App\Livewire\Notification\ShowNotificationDocumentPage::class)->name('notifications.show'); // Add this
+            Route::get('{notification}/{document}', \App\Livewire\Notification\ShowNotificationDocumentPage::class)->name('notifications.show');
         });
     });

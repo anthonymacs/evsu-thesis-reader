@@ -32,7 +32,6 @@ class DocumentPreviewController extends Controller
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="'.$document->title.'.pdf"',
             'X-Content-Type-Options' => 'nosniff',
-            'Content-Security-Policy' => "default-src 'none'; script-src 'none'; object-src 'none'",
             'X-Frame-Options' => 'SAMEORIGIN',
         ]);
     }

@@ -31,7 +31,7 @@
                 @php $isUnread = is_null($notification->read_at); @endphp
 
                 
-                  <a  href="{{ route('notifications.show', $notification->id) }}"
+                 <a href="{{ route('notifications.show', [$notification->id, $notification->document->slug]) }}"
                     wire:key="notification-{{ $notification->id }}"
                     class="flex items-start gap-4 px-6 py-5 w-full border-b border-slate-100 last:border-b-0 transition-colors no-underline
                         {{ $isUnread ? 'bg-university-red/5 hover:bg-university-red/10' : 'hover:bg-slate-50' }}">

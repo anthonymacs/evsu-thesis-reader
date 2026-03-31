@@ -21,23 +21,26 @@ class ShowNotificationDocumentPage extends Component
     public array $viewsByCourse = [];
     public bool $showViewsModal = false;
 
-    public function mount(Document $document): void
+    public function mount(Notification $notification, Document $document): void
     {
+        // Ensure the notification belongs to the current user
+        if ($notification->user_id !== auth()->id()) {
+            abort(403);
+        }
+
         $this->authorize('view', $document);
 
         $this->document = $document->load(['tags', 'category', 'uploader']);
 
-        // Mark the notification as read when document is opened
-        Notification::where('user_id', auth()->id())
-            ->where('document_id', $document->id)
-            ->whereNull('read_at')
-            ->update(['read_at' => now()]);
+        // Mark as read
+        if (is_null($notification->read_at)) {
+            $notification->update(['read_at' => now()]);
+        }
 
         $this->trackDocumentView();
         $this->loadReadLaterState();
         $this->loadViewsByCourse();
     }
-
     protected function trackDocumentView(): void
     {
         $user = auth()->user();

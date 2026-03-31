@@ -9,7 +9,7 @@
                     <img src="{{ asset('images/logo.jpg') }}" alt="EVSU Logo" class="h-full w-full object-cover">
                 </div>
                 <div class="flex flex-col justify-center min-w-0">
-                    <h1 class="text-base sm:text-xl font-bold text-white tracking-wide leading-none truncate">EVSU Reader</h1>
+                    <h1 class="text-base sm:text-xl font-bold text-white tracking-wide leading-none truncate">EVSU Thesis Reader</h1>
                     <span class="text-[10px] sm:text-[11px] text-white/80 uppercase tracking-wider mt-1 truncate">School of Engineering</span>
                 </div>
             </a>
