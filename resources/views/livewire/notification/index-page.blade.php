@@ -28,45 +28,65 @@
         <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
 
             @forelse ($notifications as $notification)
-                @php $isUnread = is_null($notification->read_at); @endphp
+                @php
+                    $isUnread = is_null($notification->read_at);
+                    $docTitle = $notification->document->title ?? 'Deleted Document';
+                    $docSlug  = $notification->document->slug ?? null;
+                @endphp
 
-                
-                 <a href="{{ route('notifications.show', [$notification->id, $notification->document->slug]) }}"
+                <div
                     wire:key="notification-{{ $notification->id }}"
-                    class="flex items-start gap-4 px-6 py-5 w-full border-b border-slate-100 last:border-b-0 transition-colors no-underline
+                    class="flex items-center gap-4 px-6 py-5 w-full border-b border-slate-100 last:border-b-0 transition-colors
                         {{ $isUnread ? 'bg-university-red/5 hover:bg-university-red/10' : 'hover:bg-slate-50' }}">
 
-                    {{-- Icon --}}
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mt-0.5
-                        {{ $isUnread ? 'bg-university-red/10' : 'bg-slate-100' }}">
-                        <svg class="w-5 h-5 {{ $isUnread ? 'text-university-red' : 'text-slate-400' }}"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586l5.414 5.414" />
-                        </svg>
-                    </div>
+                    {{-- Clickable link wraps icon + message only --}}
+                    <a href="{{ $docSlug ? route('notifications.show', [$notification->id, $docSlug]) : '#' }}"
+                        class="flex items-start gap-4 flex-1 min-w-0 no-underline">
 
-                    {{-- Message --}}
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm {{ $isUnread ? 'text-slate-800 font-medium' : 'text-slate-500' }}">
-                            A new document
-                            <span class="{{ $isUnread ? 'text-university-red' : 'font-medium text-slate-700' }} hover:underline">
-                                "{{ $notification->document->title }}"
-                            </span>
-                            was uploaded.
-                        </p>
-                        <p class="text-xs text-slate-400 mt-1">
-                            {{ $notification->created_at->diffForHumans() }}
-                        </p>
-                    </div>
-
-                    {{-- Unread dot --}}
-                    @if ($isUnread)
-                        <div class="flex-shrink-0 flex items-center">
-                            <div class="w-2.5 h-2.5 bg-university-red rounded-full"></div>
+                        {{-- Icon --}}
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mt-0.5
+                            {{ $isUnread ? 'bg-university-red/10' : 'bg-slate-100' }}">
+                            <svg class="w-5 h-5 {{ $isUnread ? 'text-university-red' : 'text-slate-400' }}"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586l5.414 5.414" />
+                            </svg>
                         </div>
-                    @endif
-                </a>
+
+                        {{-- Message --}}
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm {{ $isUnread ? 'text-slate-800 font-medium' : 'text-slate-500' }}">
+                                A new document
+                                <span class="{{ $isUnread ? 'text-university-red' : 'font-medium text-slate-700' }} hover:underline">
+                                    "{{ $docTitle }}"
+                                </span>
+                                was uploaded.
+                            </p>
+                            <p class="text-xs text-slate-400 mt-1">
+                                {{ $notification->created_at->diffForHumans() }}
+                            </p>
+                        </div>
+
+                    </a>
+
+                    {{-- Right side: unread dot + delete button --}}
+                    <div class="flex-shrink-0 flex items-center gap-3">
+
+                        {{-- Unread dot --}}
+                        @if ($isUnread)
+                            <div class="w-2.5 h-2.5 bg-university-red rounded-full"></div>
+                        @endif
+
+                        {{-- Delete Button --}}
+                        <x-ui.delete-button
+                            :id="$notification->id"
+                            :name="$docTitle"
+                            resource="Notification"
+                            wire="deleteNotification" />
+
+                    </div>
+
+                </div>
 
             @empty
                 <div class="px-6 py-12 text-center">

@@ -207,7 +207,7 @@ class CreatePage extends Component
             'visibility' => $validated['visibility'],
             'status' => $validated['status'],
             'view_count' => 0,
-            'course'      => $validated['course'] ?? null, 
+             'course'      => !empty($validated['course']) ? $validated['course'] : null,
         ]);
     }
 
