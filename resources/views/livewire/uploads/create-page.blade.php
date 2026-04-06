@@ -3,7 +3,7 @@
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-900">Upload Document</h1>
-            <p class="text-sm text-gray-500">Upload a new document to the system for sharing and organization.</p>
+            <p class="text-sm text-gray-500">Upload a new thesis to the system for sharing and organization.</p>
         </div>
         <x-ui.button variant="secondary" size="sm" href="{{ route('documents.index') }}">
             <x-slot:icon>

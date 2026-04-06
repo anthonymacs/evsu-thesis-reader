@@ -115,7 +115,7 @@
             <!-- Replace File Section -->
             <x-form.section title="Replace File (Optional)" description="Upload a new file to replace the current one">
                 <div>
-                    <x-form.label for="file">New Document File</x-form.label>
+                    <x-form.label for="file">New Thesis File</x-form.label>
                     <div class="mt-1">
                         <label for="file"
                             class="flex flex-col items-center justify-center w-full h-40 px-4 transition bg-gray-50 border-2 border-gray-200 border-dashed rounded-xl cursor-pointer hover:bg-gray-100 hover:border-university-red/30">

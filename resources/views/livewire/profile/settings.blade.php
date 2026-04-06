@@ -1,4 +1,4 @@
-<x-slot name="title">My Profile - DocHub</x-slot>
+<x-slot name="title">My Profile - ThesisHob</x-slot>
 <div class="max-w-4xl mx-auto">
     <!-- Page Header -->
     <div class="mb-8">

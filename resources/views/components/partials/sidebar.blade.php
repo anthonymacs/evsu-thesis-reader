@@ -9,18 +9,22 @@
     class="bg-university-red text-white fixed md:static inset-y-0 left-0 z-30 overflow-y-auto transition-all duration-300 shadow-lg flex flex-col"
     style="display: none;">
 
+    {{-- ✅ Logo closes properly here --}}
     <a wire:navigate href="{{ route('home') }}"
-        class="flex items-center justify-center h-20 border-b border-red-900 flex-shrink-0 hover:bg-black/10 transition-colors duration-200">
+        class="flex items-center justify-center h-16 border-b border-red-900 flex-shrink-0 hover:bg-black/10 transition-colors duration-200">
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/eeevsu.jpg') }}" alt="EVSU Logo" class="w-12 h-12"
+            <img src="{{ asset('images/eeevsu.jpg') }}" alt="EVSU Logo" class="w-10 h-10"
                 style="border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
-            <span x-show="!sidebarCollapsed" x-transition class="text-2xl font-bold">
-                DocHub
+            <span x-show="!sidebarCollapsed" x-transition
+                class="text-white tracking-widest uppercase"
+                style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; letter-spacing: 0.12em;">
+                Thesis<em style="font-style: italic; font-weight: 700; letter-spacing: 0.06em;">Hub</em>
             </span>
         </div>
-    </a>
+    </a>{{-- ✅ <a> tag is now properly closed before <nav> --}}
 
-    <nav class="mt-6 px-3 flex-1 overflow-y-auto pb-20">
+    {{-- ✅ Nav is now outside the <a> tag --}}
+    <nav class="mt-2 px-3 flex-1 overflow-y-auto pb-20">
 
         @can('view-dashboard')
         <x-partials.sidebar-link href="{{ route('dashboard.index') }}" route="dashboard*" label="Dashboard">
@@ -70,7 +74,6 @@
         </x-partials.sidebar-link>
         @endcan
 
-        {{-- Read Later - Available for all authenticated users --}}
         <x-partials.sidebar-link href="{{ route('read-later.index') }}" route="read-later.*" label="Read Later">
             <x-slot:icon>
                 <div class="relative inline-block">
@@ -81,7 +84,7 @@
                 </div>
             </x-slot:icon>
         </x-partials.sidebar-link>
-        {{-- Notifications --}}
+
         @auth
         <x-partials.sidebar-link href="{{ route('notifications.index') }}" route="notifications.*" label="Notifications">
             <x-slot:icon>
@@ -102,12 +105,11 @@
         <hr class="my-4 border-red-900" x-show="!sidebarCollapsed">
     </nav>
 
-
-
     <div class="border-t border-red-900 p-4 flex-shrink-0">
         <button @click="sidebarCollapsed = !sidebarCollapsed"
             class="w-full text-sm font-medium opacity-80 hover:opacity-100 transition">
             Collapse
         </button>
     </div>
+
 </aside>

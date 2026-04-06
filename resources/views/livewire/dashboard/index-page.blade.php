@@ -4,7 +4,7 @@
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4 border-b border-gray-200">
         <div>
             <h1 class="text-2xl font-extrabold text-gray-900 leading-tight">Thesis Dashboard</h1>
-            <p class="text-sm text-gray-600 mt-1">Precision management for your crucial documents.</p>
+            <p class="text-sm text-gray-600 mt-1">Precision management for your crucial Thesis.</p>
         </div>
         <div class="text-xs text-gray-500 flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full shadow-sm border border-gray-100">
             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -44,7 +44,7 @@
                         @endif
                     </div>
                     <div>
-                        <p class="text-sm text-gray-600 mb-0.5">Total Documents</p>
+                        <p class="text-sm text-gray-600 mb-0.5">Total Thesis</p>
                         <h3 class="text-3xl font-extrabold text-gray-900 counter" data-target="{{ $totalDocuments }}">0</h3>
                     </div>
                     <div class="mt-4 h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
@@ -171,14 +171,14 @@
 
             <!-- Document Status -->
             <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-5">Document Status</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-5">Thesis Status</h3>
                 @if ($totalDocuments > 0)
                     <div class="space-y-5">
                         <div>
                             <div class="flex items-center justify-between mb-2">
                                 <div class="flex items-center gap-3">
                                     <span class="block w-4 h-4 bg-green-600 rounded-full shadow-sm"></span>
-                                    <span class="text-md font-medium text-gray-800">Active Docs</span>
+                                    <span class="text-md font-medium text-gray-800">Active Thesis</span>
                                 </div>
                                 <span class="text-md font-extrabold text-gray-900">{{ number_format($activeCount) }} ({{ $activePercentage }}%)</span>
                             </div>
@@ -190,7 +190,7 @@
                             <div class="flex items-center justify-between mb-2">
                                 <div class="flex items-center gap-3">
                                     <span class="block w-4 h-4 bg-red-600 rounded-full shadow-sm"></span>
-                                    <span class="text-md font-medium text-gray-800">Archived Docs</span>
+                                    <span class="text-md font-medium text-gray-800">Archived Thesis</span>
                                 </div>
                                 <span class="text-md font-extrabold text-gray-900">{{ number_format($archivedCount) }} ({{ $archivedPercentage }}%)</span>
                             </div>
@@ -201,7 +201,7 @@
                     </div>
                 @else
                     <div class="text-center py-6 bg-gray-50 rounded-lg border border-gray-100">
-                        <p class="text-gray-500 text-sm">No documents have been added yet.</p>
+                        <p class="text-gray-500 text-sm">No Thesis had been added yet.</p>
                     </div>
                 @endif
             </div>

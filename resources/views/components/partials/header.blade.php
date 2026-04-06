@@ -10,7 +10,7 @@
                 </svg>
             </button>
 
-            <h1 class="text-xl font-semibold text-gray-800">Document Hub</h1>
+            <h1 class="text-xl font-semibold text-gray-800">Academic Archive</h1>
         </div>
 
         <div class="flex items-center space-x-4">

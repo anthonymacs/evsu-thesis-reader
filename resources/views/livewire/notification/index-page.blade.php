@@ -6,7 +6,7 @@
             <div>
                 <h1 class="text-2xl font-bold text-slate-900">Notifications</h1>
                 <p class="text-sm text-slate-500 mt-1">
-                    Stay updated on new document uploads.
+                    Stay updated on new Thesis uploads.
                     @if ($unreadCount > 0)
                         <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-university-red text-white">
                             {{ $unreadCount }} unread
@@ -56,7 +56,7 @@
                         {{-- Message --}}
                         <div class="flex-1 min-w-0">
                             <p class="text-sm {{ $isUnread ? 'text-slate-800 font-medium' : 'text-slate-500' }}">
-                                A new document
+                                A new Thesis
                                 <span class="{{ $isUnread ? 'text-university-red' : 'font-medium text-slate-700' }} hover:underline">
                                     "{{ $docTitle }}"
                                 </span>
