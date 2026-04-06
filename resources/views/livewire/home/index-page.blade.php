@@ -1,4 +1,4 @@
-<div class="relative w-full overflow-hidden min-h-[calc(100vh-64px)] flex bg-white text-gray-900">
+<div class="relative w-full overflow-hidden min-h-[calc(100vh-64px)] flex flex-col lg:flex-row bg-white text-gray-900">
 
     <!-- Left Content Panel -->
     <div class="relative flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-20 py-16 z-10">
@@ -61,7 +61,7 @@
     </div>
 
     <!-- Right Full-Height Visual Panel -->
-    <div class="hidden lg:flex w-[48%] relative bg-gray-50/50 items-center justify-center overflow-hidden border-l border-gray-100">
+    <div class="flex w-full lg:w-[48%] relative bg-gray-50/50 items-center justify-center overflow-hidden lg:border-l border-gray-100 py-16 lg:py-0">
 
         <!-- Very subtle background shapes -->
         <div class="absolute top-[-10%] right-[-10%] w-80 h-80 bg-red-100/50 rounded-full blur-3xl pointer-events-none"></div>
@@ -72,8 +72,8 @@
             style="background-image: radial-gradient(circle, #ddd 1px, transparent 1px); background-size: 28px 28px;">
         </div>
 
-        <!-- Book wrapper -->
-        <div class="relative flex flex-col items-center gap-8">
+        <!-- Book wrapper — scaled down on mobile -->
+        <div class="relative flex flex-col items-center gap-8 scale-75 sm:scale-90 lg:scale-100 origin-center">
 
             <!-- Book -->
             <div class="relative flex items-center justify-center w-72 h-96" style="perspective: 1200px;">
